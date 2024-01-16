@@ -28,6 +28,10 @@ public class Race {
         return horses.size();
     }
 
+    public Horse getCurrentHorse(){
+        return horses.get(currentHorse);
+    }
+
     public Horse getNextHorse(){
         if (currentHorse == horses.size())
             currentHorse = 0;
@@ -81,7 +85,7 @@ public class Race {
                 results.add(horse);
                 horse.setRaceFinished(true);
             } else if(!horse.raceFinished()){
-                horse.incrementPosition((int)(Math.random() * 4));
+                horse.incrementPosition(getIncrement(horse)); // cant leave this part the same //we have acsess to the horse in the rrace class
             }
 
             displayResults();
@@ -93,6 +97,15 @@ public class Race {
         HorseRacingHelper.stopMusic();
     }
     // Other methods for simulating the race, calculating winners, etc., can be added as needed
+
+    private int getIncrement(Horse horse) {
+        // horse.getMudRating()
+        // horse.getDirtRating()
+        // horse.getGrassRating()
+        //horse.getPreferredLength() // use the difference in the rating and the actual to determine the preference
+
+        return (int)(Math.random() * 4); // this needs to change 
+    }
 
     private void resetHorses() {
         for (Horse horse : horses) {
