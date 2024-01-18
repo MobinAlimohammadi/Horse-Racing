@@ -28,10 +28,6 @@ public class Race {
         return horses.size();
     }
 
-    public Horse getCurrentHorse(){
-        return horses.get(currentHorse);
-    }
-
     public Horse getNextHorse(){
         if (currentHorse == horses.size())
             currentHorse = 0;
@@ -41,6 +37,10 @@ public class Race {
 
     public double getRaceLength() {
         return raceLength;
+    }
+
+    public Horse getCurrentHorse(){
+        return horses.get(currentHorse);
     }
 
     public String getRaceSurface() {
@@ -99,12 +99,49 @@ public class Race {
     // Other methods for simulating the race, calculating winners, etc., can be added as needed
 
     private int getIncrement(Horse horse) {
-        // horse.getMudRating()
-        // horse.getDirtRating()
-        // horse.getGrassRating()
-        //horse.getPreferredLength() // use the difference in the rating and the actual to determine the preference
-
-        return (int)(Math.random() * 4); // this needs to change 
+        if(this.raceSurface.equals("Dirt")){
+            double dirtRating=(Math.abs(this.getRaceLength()-horse.getPreferredLength())-horse.getDirtRating());
+            // the smaller the number, the better the rating/random number they should get
+            if(dirtRating>=20)
+                return ((int)(Math.random() * 5))+1; // figure out range we want to give - BAD RATING (1-5)
+            else if(dirtRating<20 && dirtRating>=15)
+                return (int)(Math.random() * 2)+5; // figure out range we want to give (5-7)
+            else if(dirtRating<15 && dirtRating>=10)
+                return (int)(Math.random() * 3)+7; // figure out range we want to give (7-10)
+            else if(dirtRating<10 && dirtRating>=0)
+                return (int)(Math.random() * 3)+10; // figure out range we want to give (10-13)
+            else
+                return (int)(Math.random() * 2)+13; // figure out range we want to give - BEST RATING (13-15)
+            }
+        else if(this.raceSurface.equals("Mud")){
+            double mudRating=(Math.abs(this.getRaceLength()-horse.getPreferredLength())-horse.getMudRating());
+            // the smaller the number, the better the rating/random number they should get
+            if(mudRating>=20)
+                return ((int)(Math.random() * 5))+1; // figure out range we want to give - BAD RATING (1-5)
+            else if(mudRating<20 && mudRating>=15)
+                return (int)(Math.random() * 2)+5; // figure out range we want to give (5-7)
+            else if(mudRating<15 && mudRating>=10)
+                return (int)(Math.random() * 3)+7; // figure out range we want to give (7-10)
+            else if(mudRating<10 && mudRating>=0)
+                return (int)(Math.random() * 3)+10; // figure out range we want to give (10-13)
+            else
+                return (int)(Math.random() * 2)+13; // figure out range we want to give - BEST RATING (13-15)
+        }
+        
+        else{
+            double grassRating=(Math.abs(this.getRaceLength()-horse.getPreferredLength())-horse.getGrassRating());
+            // the smaller the number, the better the rating/random number they should get
+            if(grassRating>=20)
+                return ((int)(Math.random() * 5))+1; // figure out range we want to give - BAD RATING (1-5)
+            else if(grassRating<20 && grassRating>=15)
+                return (int)(Math.random() * 2)+5; // figure out range we want to give (5-7)
+            else if(grassRating<15 && grassRating>=10)
+                return (int)(Math.random() * 3)+7; // figure out range we want to give (7-10)
+            else if(grassRating<10 && grassRating>=0)
+                return (int)(Math.random() * 3)+10; // figure out range we want to give (10-13)
+            else
+                return (int)(Math.random() * 2)+13; // figure out range we want to give - BEST RATING (13-15)
+        }
     }
 
     private void resetHorses() {
