@@ -69,6 +69,10 @@ public class Player{
         Scanner in=new Scanner(System.in);
         System.out.println("Which horse would you like to bet on to win? ");
         String winBetHorse=in.nextLine();
+        while(!(winBetHorse.equals(getHorses()))){
+            System.out.println("Please enter a valid horse that is racing: ");
+        }
+        
     }
 
 
@@ -77,6 +81,9 @@ public class Player{
         Scanner in=new Scanner(System.in);
         System.out.println("Which horse would to like to bet on to win first or second? ");
         String placeBetHorse=in.nextLine();
+        while(!(placeBetHorse.equals(getHorses()))){
+            System.out.println("Please enter a valid horse that is racing: ");
+        }
     }
 
 
@@ -85,6 +92,9 @@ public class Player{
        Scanner in=new Scanner(System.in);
        System.out.println("Which horse would you like to bet on to win first, second or third? ");
        String showBetHorse=in.nextLine();
+       while(!(showBetHorse.equals(getHorses()))){
+        System.out.println("Please enter a valid horse that is racing: ");
+    }
     }
 
     public void displayPlayerInfo(){
@@ -131,6 +141,8 @@ public class Player{
                     }
         
                 }
+
+            }
     
             System.out.println("What kind of bet would you like to make, win, place, or show?");
             String bettingMode=in.nextLine();
@@ -150,7 +162,7 @@ public class Player{
 
             setBet(amount);
             setWallet((getWallet() - amount));
-           }
+           
            
            
         }
