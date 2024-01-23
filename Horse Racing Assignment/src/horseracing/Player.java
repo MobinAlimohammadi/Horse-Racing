@@ -44,13 +44,23 @@ public class Player{
         currentBet = amount;
        }
 
-       public void betMode(String mode){
-        if (mode.equalsIgnoreCase("win")){
-            win();
-        }else if (mode.equalsIgnoreCase("place")){
-            place();
-        }else if (mode.equalsIgnoreCase("show")){
-            show();
+       public void printBetModes(){
+
+        System.out.println("Select your bet mode by selecting:");
+        System.out.println("1 - WIN");
+        System.out.println("2 - PLACE");
+        System.out.println("3 - SHOW");
+
+
+       }
+
+    public void betMode(String mode){
+    if (mode.equalsIgnoreCase("win")){
+        win();
+    }else if (mode.equalsIgnoreCase("place")){
+        place();
+    }else if (mode.equalsIgnoreCase("show")){
+        show();
         }
        }
 
@@ -77,59 +87,76 @@ public class Player{
        String showBetHorse=in.nextLine();
     }
 
+    public void displayPlayerInfo(){
+        for (int i = 0; i < 5; i++){
+            String s1 = "name: " + name;
+            String s2 = "ballance: " + wallet;
+            String s3 = "bet amount: " + currentBet; // make multiple betts and make the table dependent 
+            //String s4 = "horse: " + horse;
+
+            System.out.println("+-----+-----+-----+-----+");
+            System.out.printf("|%5s|%5s|%5s|%5s|\n", s1,s2,s3);
+            }
+            System.out.printf("+-----+-----+-----+-----+");
+        }
 
 
-    public void askBet(List<Horse> horses) {
-        Scanner in = new Scanner(System.in);
-        boolean validBet=false;
-        boolean validHorse = false;
-        double amount = 0;
-        System.out.println("Made it here");
-        while(!validBet) {
-            System.out.println("Wallet: " + getWallet());
-            int min=0; 
-            double max=wallet;
-
-            boolean isValid = false;
-            int result = 0;
+        public void askBet(List<Horse> horses) {
+            Scanner in = new Scanner(System.in);
+            boolean validBet=false;
+            boolean validHorse = false;
+            double amount = 0;
+            System.out.println("Made it here");
+            while(!validBet) {
+                System.out.println("Wallet: " + getWallet());
+                int min=0; 
+                double max=wallet;
     
-            while(!isValid){
-                System.out.print("Please enter a bet amount: ");
-                
-                try{
-                    amount = Integer.parseInt(in.nextLine());
-                    if (result < min || result > max)
-                        System.out.println("Ensure your bet is within our wallet limit and more than the minimum bet, $2.");
-                    else{
-                        isValid = true;
-                        validBet = true;
+                boolean isValid = false;
+                int result = 0;
+        
+                while(!isValid){
+                    System.out.print("Please enter a bet amount: ");
+                    
+                    try{
+                        amount = Integer.parseInt(in.nextLine());
+                        if (result < min || result > max)
+                            System.out.println("Ensure your bet is within our wallet limit and more than the minimum bet, $2.");
+                        else{
+                            isValid = true;
+                            validBet = true;
+                        }
+                    }catch(NumberFormatException badThing){
+                        System.out.println("Numbers only!");
                     }
-                }catch(NumberFormatException badThing){
-                    System.out.println("Numbers only!");
+        
                 }
     
+            System.out.println("What kind of bet would you like to make, win, place, or show?");
+            String bettingMode=in.nextLine();
+            this.betMode(bettingMode); // figure out errors'
+            
+            while(!(bettingMode.equalsIgnoreCase("win")|| bettingMode.equalsIgnoreCase("place")|| bettingMode.equalsIgnoreCase("show"))){
+                System.out.println("Please enter a valid bet type (win, place, or show)");
+                bettingMode=in.nextLine();
             }
+    
+            if(bettingMode.equalsIgnoreCase("win"))
+                win();
+            else if(bettingMode.equalsIgnoreCase("place"))
+                place();
+            else
+                show();
 
-        System.out.println("What kind of bet would you like to make, win, place, or show?");
-        String bettingMode=in.nextLine();
-        this.betMode(bettingMode); // figure out errors'
-        
-        while(!(bettingMode.equalsIgnoreCase("win")|| bettingMode.equalsIgnoreCase("place")|| bettingMode.equalsIgnoreCase("show"))){
-            System.out.println("Please enter a valid bet type (win, place, or show");
-            bettingMode=in.nextLine();
+            setBet(amount);
+            setWallet((getWallet() - amount));
+           }
+           
+           
         }
-
-
-        
-
-        for (Horse horse : horses) {
-
-        }
-        setBet(amount);
-        setWallet((getWallet() - amount));
-       }
-       
        
     }
+       
+       
+    
 
-}
