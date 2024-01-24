@@ -44,48 +44,58 @@ public class Player{
         currentBet = amount;
        }
 
-    public void betMode(String mode){
-    if (mode.equalsIgnoreCase("win")){
-        win();
-    }else if (mode.equalsIgnoreCase("place")){
-        place();
-    }else if (mode.equalsIgnoreCase("show")){
-        show();
-        }
-    }
+    // public void betMode(String mode){
+    // if (mode.equalsIgnoreCase("win")){
+    //     win(horses);
+    // }else if (mode.equalsIgnoreCase("place")){
+    //     place();
+    // }else if (mode.equalsIgnoreCase("show")){
+    //     show();
+    //     }
+    // }
 
     
-    private void win() {
+    private void win(List<Horse> horses) {
         Scanner in=new Scanner(System.in);
-        System.out.println("Which horse would you like to bet on to win? ");
-        String winBetHorse=in.nextLine();
-        //while(!(winBetHorse.equals(getHorses()))){
-            System.out.println("Please enter a valid horse that is racing: ");
-        }
-        
-    //}
-
-
-
-    private void place() {
-        Scanner in=new Scanner(System.in);
-        System.out.println("Which horse would to like to bet on to win first or second? ");
-        String placeBetHorse=in.nextLine();
-        //while(!(placeBetHorse.equals(getHorses()))){
-            System.out.println("Please enter a valid horse that is racing: ");
-        }
-    //}
-
-
-
-    private void show() {
-       Scanner in=new Scanner(System.in);
-       System.out.println("Which horse would you like to bet on to win first, second or third? ");
-       String showBetHorse=in.nextLine();
-       //while(!(showBetHorse.equals(getHorses()))){
-        System.out.println("Please enter a valid horse that is racing: ");
+        boolean goodHorse = false;
+        while(!goodHorse){
+            System.out.println("Which horse would you like to bet on to win first? Ensure it is a horse racing in this race. ");
+            String winBetHorse=in.nextLine();
+            for (Horse horse : horses) {
+                if (winBetHorse.equalsIgnoreCase(horse.getName()))
+                    goodHorse = true;
+            }
+        }        
     }
-    //}
+
+
+    public void place(List<Horse> horses) {
+        Scanner in=new Scanner(System.in);
+        boolean goodHorse = false;
+        while(!goodHorse){
+            System.out.println("Which horse would you like to bet on to win first or second? Ensure it is a horse racing in this race.");
+            String winBetHorse=in.nextLine();
+            for (Horse horse : horses) {
+                if (winBetHorse.equalsIgnoreCase(horse.getName()))
+                    goodHorse = true;
+            }
+        }
+    }
+
+
+
+    public void show(List<Horse> horses) {
+        Scanner in=new Scanner(System.in);
+        boolean goodHorse = false;
+        while(!goodHorse){
+            System.out.println("Which horse would you like to bet on to win first, second, or third? Ensure it is a horse racing in this race.");
+            String winBetHorse=in.nextLine();
+            for (Horse horse : horses) {
+                if (winBetHorse.equalsIgnoreCase(horse.getName()))
+                    goodHorse = true;
+            }
+        }
+    }
 
     public void displayPlayerInfo(){
         for (int i = 0; i < 5; i++){
@@ -134,8 +144,7 @@ public class Player{
             }
     
             System.out.println("What kind of bet would you like to make? (win, place, or show)");
-            String bettingMode=in.nextLine();
-            this.betMode(bettingMode); 
+            String bettingMode=in.nextLine(); 
             
             while(!(bettingMode.equalsIgnoreCase("win")|| bettingMode.equalsIgnoreCase("place")|| bettingMode.equalsIgnoreCase("show"))){
                 System.out.println("Please enter a valid bet type (win, place, or show)");
@@ -143,11 +152,11 @@ public class Player{
             }
     
             if(bettingMode.equalsIgnoreCase("win"))
-                win();
+                win(horses);
             else if(bettingMode.equalsIgnoreCase("place"))
-                place();
+                place(horses);
             else
-                show();
+                show(horses);
 
             setBet(amount);
             setWallet((getWallet() - amount));

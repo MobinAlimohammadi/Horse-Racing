@@ -94,11 +94,11 @@ public class Race {
         int multiplier;
 
         if ("Dirt".equals(raceSurface)) {
-            multiplier = winHorse.getDirtRating();
+            multiplier = 10-winHorse.getDirtRating();
         } else if ("Grass".equals(raceSurface)) {
-            multiplier = winHorse.getGrassRating();
+            multiplier = 10-winHorse.getGrassRating();
         } else if ("Mud".equals(raceSurface)) {
-            multiplier = winHorse.getMudRating();
+            multiplier = 10-winHorse.getMudRating();
         } else {
             multiplier = 1;
         }
@@ -110,11 +110,11 @@ public class Race {
     }
 
     public String getPlaceOdds(int current){
-        return (int)(getWinOdds(current)/1.5) + ":";
+        return (int)(getWinOdds(current)*1.5) + ":";
     }
 
     public String getShowOdds(int current){
-        return (int)(getWinOdds(current)/2.5) + ":";
+        return (int)(getWinOdds(current)*2.5) + ":";
     }
 
     public void displayResults(){
@@ -170,6 +170,9 @@ public class Race {
         return (int)(Math.random()*increment) + 1;
         }
     
+    // public int payOut(){
+    //     if(winHorse) // pay out here 
+    // }
 
     private void resetHorses() {
         for (Horse horse : horses) {
