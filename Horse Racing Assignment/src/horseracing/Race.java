@@ -24,6 +24,30 @@ public class Race {
         return horses;
     }
 
+    public void payOut(){
+        if(Player.getBettingMode().equalsIgnoreCase("win")){
+            if(results.get(0).getName().equalsIgnoreCase(Player.getWinBetHorse())){
+                System.out.println("Your bet won!");
+            }
+            else 
+                System.out.println("Your bet lost :(");
+        }
+
+        if(Player.getBettingMode().equalsIgnoreCase("place")){
+            if(results.get(0).getName().equalsIgnoreCase(Player.getPlaceBetHorse())|| results.get(1).getName().equalsIgnoreCase(Player.getPlaceBetHorse()))
+                System.out.println("Your bet won!");
+            else 
+                System.out.println("Your bet lost :(");
+        }
+
+        if(Player.getBettingMode().equalsIgnoreCase("show")){
+            if(results.get(0).getName().equalsIgnoreCase(Player.getShowBetHorse())|| results.get(1).getName().equalsIgnoreCase(Player.getShowBetHorse()))
+                System.out.println("Your bet won!");
+            else 
+                System.out.println("Your bet lost :(");
+        }
+    }
+
     public int numHorses(){
         return horses.size();
     }
