@@ -87,7 +87,7 @@ public class Race {
     }
 
 
-    public int getWinOdds(int current){
+    public String getWinOdds(int current){
 
         Horse winHorse = horses.get(current);
         double preferredLength = winHorse.getPreferredLength();
@@ -104,17 +104,71 @@ public class Race {
         }
 
         double lengthMultiplier = Math.abs(preferredLength - raceLength) + 1;
-        int winOdds = (int) (multiplier + lengthMultiplier);
+        String winOdds = "";
+        if((multiplier + lengthMultiplier)%3 == 0)
+            winOdds += (int)(multiplier + lengthMultiplier)/3 + "-1";
+        
+        else
+            winOdds += (int)(multiplier + lengthMultiplier) + "-3";
+        
         
         return winOdds;
     }
 
     public String getPlaceOdds(int current){
-        return (int)(getWinOdds(current)*1.5) + ":";
+
+        Horse placeHorse = horses.get(current);
+        double preferredLength = placeHorse.getPreferredLength();
+        int multiplier;
+
+        if ("Dirt".equals(raceSurface)) {
+            multiplier = 10-placeHorse.getDirtRating();
+        } else if ("Grass".equals(raceSurface)) {
+            multiplier = 10-placeHorse.getGrassRating();
+        } else if ("Mud".equals(raceSurface)) {
+            multiplier = 10-placeHorse.getMudRating();
+        } else {
+            multiplier = 1;
+        }
+
+        double lengthMultiplier = Math.abs(preferredLength - raceLength) + 1;
+        String placeOdds = "";
+        if((multiplier + lengthMultiplier)%3 == 0)
+        placeOdds += (int)((multiplier + lengthMultiplier)/3)+2 + "-1";
+        
+        else
+        placeOdds += (int)(multiplier + lengthMultiplier)+2 + "-3";
+        
+        
+        return placeOdds;
     }
 
     public String getShowOdds(int current){
-        return (int)(getWinOdds(current)*2.5) + ":";
+
+        Horse showHorse = horses.get(current);
+        double preferredLength = showHorse.getPreferredLength();
+        int multiplier;
+
+        if ("Dirt".equals(raceSurface)) {
+            multiplier = 10-showHorse.getDirtRating();
+        } else if ("Grass".equals(raceSurface)) {
+            multiplier = 10-showHorse.getGrassRating();
+        } else if ("Mud".equals(raceSurface)) {
+            multiplier = 10-showHorse.getMudRating();
+        } else {
+            multiplier = 1;
+        }
+
+        double lengthMultiplier = Math.abs(preferredLength - raceLength) + 1;
+        String showOdds = "";
+        if((multiplier + lengthMultiplier)%3 == 0)
+        showOdds += (int)((multiplier + lengthMultiplier)/3)+3 + "-1";
+        
+        else
+        showOdds += (int)(multiplier + lengthMultiplier)+3 + "-3";
+        
+        
+        return showOdds;
     }
 
     public void displayResults(){
