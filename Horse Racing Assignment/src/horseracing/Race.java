@@ -61,13 +61,13 @@ public class Race {
     public void displayHorseTable(){
         String k1 = "Horse Name";
         String k2 = "Prefered Length";
-        String k3 = "Grass Rating";
+        String k3 = "Grass Rating"; 
         String k4 = "Mud Rating";
         String k5 = "Dirt Rating";
         String k6 = "Win Odds";
         String k7 = "Place Odds";
-        String k8 = "Shows Odds";
-        System.out.printf("|%-26s|%15s|%12s|%10s|%11s|%8s|%10s|%10s|\n", k1, k2, k3, k4, k5, k6, k7, k8);
+        String k8 = "Show Odds";
+        System.out.printf("|%-26s|%15s|%16s|%14s|%15s|%8s|%10s|%9s|\n", k1, k2, k3, k4, k5, k6, k7, k8);
 
         for (int i = 0; i < horses.size(); i++) {
             Horse horse = horses.get(i);
@@ -76,16 +76,45 @@ public class Race {
             String s3 = "" + horse.getGrassRating();
             String s4 = "" + horse.getMudRating();
             String s5 = "" + horse.getDirtRating();
-            String s7 = "" + getOdds();
+            String s6 = "" + this.getWinOdds(i)+":";
+            String s7 = "" + this.getPlaceOdds(i);
+            String s8 = "" + this.getShowOdds(i);
  
-            System.out.println("+--------------------------+---------------+------------+----------+-----------+--------+----------+----------+");
-            System.out.printf("|%-26s|%15s|%12s|%10s|%11s|\n", s1, s2, s3, s4, s5);
+            System.out.println("+--------------------------+---------------+----------------+--------------+---------------+--------+----------+---------+");
+            System.out.printf("|%-26s|%15s|%16s|%14s|%15s|%8s|%10s|%9s|\n", s1, s2, s3, s4, s5, s6, s7, s8);
         }
-        System.out.println("+--------------------------+---------------+------------+----------+-----------+--------+----------+----------+");
+        System.out.println("+--------------------------+---------------+----------------+--------------+---------------+--------+----------+---------+");
     }
 
-    public String getWinOdds(){
-        return 0;
+
+    public int getWinOdds(int current){
+
+        Horse winHorse = horses.get(current);
+        double preferredLength = winHorse.getPreferredLength();
+        int multiplier;
+
+        if ("Dirt".equals(raceSurface)) {
+            multiplier = winHorse.getDirtRating();
+        } else if ("Grass".equals(raceSurface)) {
+            multiplier = winHorse.getGrassRating();
+        } else if ("Mud".equals(raceSurface)) {
+            multiplier = winHorse.getMudRating();
+        } else {
+            multiplier = 1;
+        }
+
+        double lengthMultiplier = Math.abs(preferredLength - raceLength) + 1;
+        int winOdds = (int) (multiplier + lengthMultiplier);
+        
+        return winOdds;
+    }
+
+    public String getPlaceOdds(int current){
+        return (int)(getWinOdds(current)/1.5) + ":";
+    }
+
+    public String getShowOdds(int current){
+        return (int)(getWinOdds(current)/2.5) + ":";
     }
 
     public void displayResults(){
