@@ -55,6 +55,37 @@ public class Race {
         for (Horse horse : horses) {
             System.out.println("- " + horse.getName());
         }
+        displayHorseTable();
+    }
+
+    public void displayHorseTable(){
+        String k1 = "Horse Name";
+        String k2 = "Prefered Length";
+        String k3 = "Grass Rating";
+        String k4 = "Mud Rating";
+        String k5 = "Dirt Rating";
+        String k6 = "Win Odds";
+        String k7 = "Place Odds";
+        String k8 = "Shows Odds";
+        System.out.printf("|%-26s|%15s|%12s|%10s|%11s|%8s|%10s|%10s|\n", k1, k2, k3, k4, k5, k6, k7, k8);
+
+        for (int i = 0; i < horses.size(); i++) {
+            Horse horse = horses.get(i);
+            String s1 = "" + horse.getName();
+            String s2 = "" + horse.getPreferredLength();
+            String s3 = "" + horse.getGrassRating();
+            String s4 = "" + horse.getMudRating();
+            String s5 = "" + horse.getDirtRating();
+            String s7 = "" + getOdds();
+ 
+            System.out.println("+--------------------------+---------------+------------+----------+-----------+--------+----------+----------+");
+            System.out.printf("|%-26s|%15s|%12s|%10s|%11s|\n", s1, s2, s3, s4, s5);
+        }
+        System.out.println("+--------------------------+---------------+------------+----------+-----------+--------+----------+----------+");
+    }
+
+    public String getWinOdds(){
+        return 0;
     }
 
     public void displayResults(){
