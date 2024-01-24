@@ -9,7 +9,6 @@ public class Player{
         private double currentBet;
         private double wallet;
 
-
         public Player(double startingBalance) {
             this.name = askName();
             this.wallet = startingBalance;
@@ -54,6 +53,7 @@ public class Player{
     //     }
     // }
 
+
     
     private void win(List<Horse> horses) {
         Scanner in=new Scanner(System.in);
@@ -66,6 +66,10 @@ public class Player{
                     goodHorse = true;
             }
         }        
+    }
+
+    public static String getBettingMode(){
+        return ;
     }
 
 
