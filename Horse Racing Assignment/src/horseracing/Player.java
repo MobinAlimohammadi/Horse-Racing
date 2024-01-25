@@ -9,7 +9,7 @@ public class Player{
         private static double currentBet;
         private static double wallet;
         public static String bettingMode;
-        public static String winBetHorse; 
+        public static String winBetHorse = ""; 
         public static String showBetHorse;
         public static String placeBetHorse;
 
