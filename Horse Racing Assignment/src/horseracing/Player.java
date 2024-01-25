@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Player{
         private String name;
-        private double currentBet;
-        private double wallet;
+        private static double currentBet;
+        private static double wallet;
         public static String bettingMode;
         public static String winBetHorse; 
         public static String showBetHorse;
@@ -48,15 +48,15 @@ public class Player{
         return bettingMode;
     }
 
-       public void setWallet(double amount) {
+       public static void setWallet(double amount) {
         wallet = amount;
        }
 
-       public double getWallet() {
+       public static double getWallet() {
         return wallet;
        }
 
-       public double getBet() { // could potentially make the betting odds so that the bank doesnt lose any money
+       public static double getBet() { // could potentially make the betting odds so that the bank doesnt lose any money
         return currentBet;
        }
 
@@ -66,13 +66,13 @@ public class Player{
     
     private void win(List<Horse> horses) {
         Scanner in=new Scanner(System.in);
-        boolean goodHorse = false;
-        while(!goodHorse){
+        int goodHorse = 0;
+        while(goodHorse<1){
             System.out.println("Which horse would you like to bet on to win first? Ensure it is a horse racing in this race. ");
             winBetHorse=in.nextLine();
             for (Horse horse : horses) {
                 if (winBetHorse.equalsIgnoreCase(horse.getName()))
-                    goodHorse = true;
+                    goodHorse++;
             }
         }        
     }
@@ -80,13 +80,13 @@ public class Player{
 
     public void place(List<Horse> horses) {
         Scanner in=new Scanner(System.in);
-        boolean goodHorse = false;
-        while(!goodHorse){
+        int goodHorse = 0;
+        while(goodHorse<1){
             System.out.println("Which horse would you like to bet on to win first or second? Ensure it is a horse racing in this race.");
             placeBetHorse=in.nextLine();
             for (Horse horse : horses) {
                 if (winBetHorse.equalsIgnoreCase(horse.getName()))
-                    goodHorse = true;
+                    goodHorse++;
             }
         }
     }
@@ -95,13 +95,13 @@ public class Player{
 
     public void show(List<Horse> horses) {
         Scanner in=new Scanner(System.in);
-        boolean goodHorse = false;
-        while(!goodHorse){
+        int goodHorse = 0;
+        while(goodHorse<1){
             System.out.println("Which horse would you like to bet on to win first, second, or third? Ensure it is a horse racing in this race.");
             showBetHorse=in.nextLine();
             for (Horse horse : horses) {
                 if (winBetHorse.equalsIgnoreCase(horse.getName()))
-                    goodHorse = true;
+                    goodHorse++;
             }
         }
     }

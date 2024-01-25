@@ -27,24 +27,38 @@ public class Race {
     public void payOut(){
         if(Player.getBettingMode().equalsIgnoreCase("win")){
             if(results.get(0).getName().equalsIgnoreCase(Player.getWinBetHorse())){
-                System.out.println("Your bet won!");
+                System.out.print("Your bet won! ");
+                Player.setWallet(Player.getWallet()+Player.getBet()*3);
+                System.out.println("Your new balance is " + Player.getWallet());
             }
-            else 
-                System.out.println("Your bet lost :(");
+            else {
+                System.out.println("------------------");
+                System.out.println("Your bet lost :(   Your Balance is" + Player.getWallet());
+                System.out.println("------------------"); }
         }
 
         if(Player.getBettingMode().equalsIgnoreCase("place")){
-            if(results.get(0).getName().equalsIgnoreCase(Player.getPlaceBetHorse())|| results.get(1).getName().equalsIgnoreCase(Player.getPlaceBetHorse()))
-                System.out.println("Your bet won!");
-            else 
-                System.out.println("Your bet lost :(");
+            if(results.get(0).getName().equalsIgnoreCase(Player.getPlaceBetHorse())|| results.get(1).getName().equalsIgnoreCase(Player.getPlaceBetHorse())){
+                System.out.print("Your bet won! ");
+                Player.setWallet(Player.getWallet()+Player.getBet()*2.5);
+                System.out.println("Your new balance is " + Player.getWallet());
+            }
+            else {
+                System.out.println("------------------");
+                System.out.println("Your bet lost :(   Your Balance is" + Player.getWallet());
+                System.out.println("------------------"); }
         }
 
         if(Player.getBettingMode().equalsIgnoreCase("show")){
-            if(results.get(0).getName().equalsIgnoreCase(Player.getShowBetHorse())|| results.get(1).getName().equalsIgnoreCase(Player.getShowBetHorse()))
-                System.out.println("Your bet won!");
-            else 
-                System.out.println("Your bet lost :(");
+            if(results.get(0).getName().equalsIgnoreCase(Player.getShowBetHorse())|| results.get(1).getName().equalsIgnoreCase(Player.getShowBetHorse())){
+                System.out.print("Your bet won! ");
+                Player.setWallet(Player.getWallet()+Player.getBet()*2);
+                System.out.println("Your new balance is " + Player.getWallet());
+        }
+            else {
+                System.out.println("------------------");
+                System.out.println("Your bet lost :(   Your Balance is" + Player.getWallet());
+                System.out.println("------------------"); }
         }
     }
 
@@ -248,9 +262,7 @@ public class Race {
         return (int)(Math.random()*increment) + 1;
         }
     
-    // public int payOut(){
-    //     if(winHorse) // pay out here 
-    // }
+
 
     private void resetHorses() {
         for (Horse horse : horses) {
