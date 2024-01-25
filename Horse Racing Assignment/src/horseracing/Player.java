@@ -85,7 +85,7 @@ public class Player{
             System.out.println("Which horse would you like to bet on to win first or second? Ensure it is a horse racing in this race.");
             placeBetHorse=in.nextLine();
             for (Horse horse : horses) {
-                if (winBetHorse.equalsIgnoreCase(horse.getName()))
+                if (placeBetHorse.equalsIgnoreCase(horse.getName()))
                     goodHorse++;
             }
         }
@@ -95,13 +95,13 @@ public class Player{
 
     public void show(List<Horse> horses) {
         Scanner in=new Scanner(System.in);
-        int goodHorse = 0;
-        while(goodHorse<1){
+        boolean goodHorse = false;
+        while(!goodHorse){
             System.out.println("Which horse would you like to bet on to win first, second, or third? Ensure it is a horse racing in this race.");
             showBetHorse=in.nextLine();
             for (Horse horse : horses) {
-                if (winBetHorse.equalsIgnoreCase(horse.getName()))
-                    goodHorse++;
+                if (showBetHorse.equals(horse.getName()))
+                    goodHorse=true;
             }
         }
     }
@@ -138,6 +138,7 @@ public class Player{
                     
                     try{
                         amount = Integer.parseInt(in.nextLine());
+                        result=(int)amount;
                         if (result < min || result > max)
                             System.out.println("Ensure your bet is within our wallet limit and more than the minimum bet, $2.");
                         else{

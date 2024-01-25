@@ -27,37 +27,37 @@ public class Race {
     public void payOut(){
         if(Player.getBettingMode().equalsIgnoreCase("win")){
             if(results.get(0).getName().equalsIgnoreCase(Player.getWinBetHorse())){
-                System.out.print("Your bet won! ");
+                System.out.print("Your bet won " + Player.getBet()*3 +"! ");
                 Player.setWallet(Player.getWallet()+Player.getBet()*3);
                 System.out.println("Your new balance is " + Player.getWallet());
             }
             else {
                 System.out.println("------------------");
-                System.out.println("Your bet lost :(   Your Balance is" + Player.getWallet());
+                System.out.println("Your bet lost :(   Your Balance is " + Player.getWallet());
                 System.out.println("------------------"); }
         }
 
         if(Player.getBettingMode().equalsIgnoreCase("place")){
             if(results.get(0).getName().equalsIgnoreCase(Player.getPlaceBetHorse())|| results.get(1).getName().equalsIgnoreCase(Player.getPlaceBetHorse())){
-                System.out.print("Your bet won! ");
+                System.out.print("Your bet won " + Player.getBet()*2.5 +"! ");
                 Player.setWallet(Player.getWallet()+Player.getBet()*2.5);
                 System.out.println("Your new balance is " + Player.getWallet());
             }
             else {
                 System.out.println("------------------");
-                System.out.println("Your bet lost :(   Your Balance is" + Player.getWallet());
+                System.out.println("Your bet lost :(   Your Balance is " + Player.getWallet());
                 System.out.println("------------------"); }
         }
 
         if(Player.getBettingMode().equalsIgnoreCase("show")){
             if(results.get(0).getName().equalsIgnoreCase(Player.getShowBetHorse())|| results.get(1).getName().equalsIgnoreCase(Player.getShowBetHorse())){
-                System.out.print("Your bet won! ");
+                System.out.print("Your bet won " + Player.getBet()*2 +"! ");
                 Player.setWallet(Player.getWallet()+Player.getBet()*2);
                 System.out.println("Your new balance is " + Player.getWallet());
         }
             else {
                 System.out.println("------------------");
-                System.out.println("Your bet lost :(   Your Balance is" + Player.getWallet());
+                System.out.println("Your bet lost :(   Your Balance is " + Player.getWallet());
                 System.out.println("------------------"); }
         }
     }
@@ -105,6 +105,7 @@ public class Race {
         String k6 = "Win Odds";
         String k7 = "Place Odds";
         String k8 = "Show Odds";
+        System.out.println(" ");
         System.out.printf("|%-26s|%15s|%16s|%14s|%11s|%8s|%10s|%9s|\n", k1, k2, k3, k4, k5, k6, k7, k8);
 
         for (int i = 0; i < horses.size(); i++) {
@@ -237,7 +238,7 @@ public class Race {
                 results.add(horse);
                 horse.setRaceFinished(true);
             } else if(!horse.raceFinished()){
-                horse.incrementPosition(getIncrement(horse)); // cant leave this part the same //we have acsess to the horse in the rrace class
+                horse.incrementPosition(getIncrement(horse)); 
             }
 
             displayResults();
