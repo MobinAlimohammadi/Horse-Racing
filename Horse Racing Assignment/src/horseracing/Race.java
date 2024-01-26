@@ -259,18 +259,7 @@ public class Race {
         }
     }
 
-    // private int getIncrement(Horse horse) { //----------------------------------------------------------------------
-    //     int increment =0;
-    //     increment+=(int)(7-Math.abs(horse.getPreferredLength()-this.raceLength));
-    //     if(raceSurface.equals("Grass"))
-    //         increment+=horse.getGrassRating();
-    //     if(raceSurface.equals("Mud"))
-    //         increment+=horse.getMudRating();
-    //     if(raceSurface.equals("Dirt"))
-    //         increment+=horse.getDirtRating();
-
-    //     return (int)(Math.random()*increment) + 1;
-    //     }
+   
 
     public void startRace(){
         resetHorses();
@@ -303,40 +292,6 @@ public class Race {
         HorseRacingHelper.stopMusic();
     }
 
-    // public double lengthOddsMultiplyer (Horse horse){
-
-    //     double lengthMultiplyer = (int)(7 - Math.abs(horse.getPreferredLength() - this.raceLength));
-    //     return lengthMultiplyer;
-
-    // }
-
-    // public double surfaceOddsMultiplyer (Horse horse){
-
-        
-    //     double surfaceMultiplyer = 0;
-    //     boolean multiComplete = true;
-
-    //     while (multiComplete!=false){
-    //     if (raceSurface.equals("grass"))
-    //         surfaceMultiplyer += horse.getGrassRating() / 2;
-    //         multiComplete = false;
-    //     if (raceSurface.equals("dirt"))
-    //         surfaceMultiplyer += horse.getDirtRating() / 2;
-    //         multiComplete = false;
-    //     if (raceSurface.equals("mud"))
-    //         surfaceMultiplyer += horse.getMudRating() / 2;
-    //         multiComplete = false;
-    //     }
-    //     return surfaceMultiplyer;
-    // }
-
-    // private int getIncrement (Horse horse){
-
-    //     int baseMove = (int)(Math.random() * 4)+1;
-    //     int increment = (int)(baseMove*surfaceOddsMultiplyer(horse)*lengthOddsMultiplyer(horse));
-    //     return increment;
-        
-    // }
 
     private int getIncrement(Horse horse) {
         int increment =0;
