@@ -46,7 +46,7 @@ public class Player{
 
        public static String getBettingMode(){
         return bettingMode;
-    }
+        }
 
        public static void setWallet(double amount) {
         wallet = amount;

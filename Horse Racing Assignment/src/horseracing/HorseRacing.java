@@ -3,7 +3,6 @@ package horseracing;
 import java.util.Scanner;
 
 public class HorseRacing {
-
      public static void main(String[] args) {
 
         int raceLength = (int)(Math.random()*2)+1;
@@ -41,9 +40,10 @@ public class HorseRacing {
         System.out.print("Play Again: (y/n): ");
         String result = in.nextLine();
 
+        int round = 0;
         if (result.equals("n"))
             return true;
-
+            round++;
         return false;
 
     }
