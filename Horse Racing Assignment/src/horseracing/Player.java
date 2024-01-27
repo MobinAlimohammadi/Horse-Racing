@@ -12,12 +12,39 @@ public class Player{
         public static String winBetHorse = ""; 
         public static String showBetHorse;
         public static String placeBetHorse;
+        public static boolean mobUnlocked;
+        public static double tipAmount;
+        private static int round;
+    
+
+
 
         public Player(double startingBalance) {
             this.name = askName();
             this.wallet = startingBalance;
             this.currentBet = 0;
             this.bettingMode="";
+            this.mobUnlocked = false;
+        }
+
+        public static double getTipAmount() {
+            return tipAmount;
+        }
+
+
+        public static void setTipAmount(double tipAmount) {
+            Player.tipAmount = tipAmount;
+        }
+
+        public boolean getMobUnlocked(){
+            return mobUnlocked;
+        }
+
+
+        public static void setMobUnlocked(boolean isMobUnlocked){
+
+            mobUnlocked = isMobUnlocked;
+           
         }
 
         
@@ -63,6 +90,14 @@ public class Player{
        public void setBet(double amount) {
         currentBet = amount;
        }
+
+       public static int getRound() {
+        return round;
+        }
+
+        public static void nextRound() {
+            round++;
+        }
     
     private void win(List<Horse> horses) {
         Scanner in=new Scanner(System.in);
@@ -100,10 +135,56 @@ public class Player{
             System.out.println("Which horse would you like to bet on to win first, second, or third? Ensure it is a horse racing in this race.");
             showBetHorse=in.nextLine();
             for (Horse horse : horses) {
-                if (showBetHorse.equals(horse.getName()))
+                if (showBetHorse.equalsIgnoreCase(horse.getName()))
                     goodHorse=true;
             }
         }
+    }
+
+    private static void askSteroid(List<Horse> horses) {
+        String steroidHorse = "";
+        boolean goodHorse = false;
+        while(!goodHorse){
+            Scanner in = new Scanner(System.in);
+            System.out.println("Select a horse to steroid: (Ensure it is a horse racing in this race.) OR Exit: ");
+            steroidHorse = in.nextLine();
+            if (steroidHorse.equalsIgnoreCase("exit")) {
+                goodHorse = true;
+                break;
+            }
+            for (Horse horse : horses) {
+                if (steroidHorse.equalsIgnoreCase(horse.getName()))
+                    goodHorse = true;
+                    horse.setDrugged(true);
+            } if (!goodHorse) {
+                System.out.println("That horse is not in the race");
+            }
+        }     
+    }
+
+
+
+    
+    private static void askSabotage(List<Horse> horses) {
+        String excludedHorse = "";
+        boolean goodHorse = false;
+        while(!goodHorse){
+            Scanner in = new Scanner(System.in);
+            System.out.println("Select a horse to exclude from the sabotage: (Ensure it is a horse racing in this race.) OR Exit: ");
+            excludedHorse = in.nextLine();
+            if (excludedHorse.equalsIgnoreCase("exit")) {
+                goodHorse = true;
+                break;
+            }
+            for (Horse horse : horses) {
+                if (excludedHorse.equalsIgnoreCase(horse.getName()))
+                    goodHorse = true;
+                    horse.setExempt(true);
+            }
+            if (!goodHorse) {
+                System.out.println("That horse is not in the race");
+            }
+        } 
     }
 
     public void displayPlayerInfo(){
@@ -119,6 +200,50 @@ public class Player{
             System.out.printf("+-----+-----+-----+-----+");
         }
 
+        public void askMob(List<Horse> horses){
+            Scanner in = new Scanner(System.in);
+            boolean mobAsked = false;
+            boolean choicePicked = false;
+            while(!mobAsked){
+                System.out.println("");
+                System.out.print("Do you want to call the mob? - yes / no: ");
+                String mobYN = in.nextLine();
+                if(mobYN.equalsIgnoreCase("yes")){
+                    System.out.println("So...");
+                    HorseRacingHelper.pauseForMilliseconds(1000);
+                    System.out.println("whats your pill of choice?");
+                    HorseRacingHelper.pauseForMilliseconds(1000);
+                    System.out.println("Sabotage?");
+                    HorseRacingHelper.pauseForMilliseconds(1000);
+                    System.out.println("...or steroid?");
+                    HorseRacingHelper.pauseForMilliseconds(1000);
+                    while (!choicePicked) {
+                        System.out.println(choicePicked);
+                        System.out.print("Please Enter Sabotage, Steroid, or Exit: ");
+                        String choice = in.nextLine();
+                        if(choice.equalsIgnoreCase("Sabotage")) {
+                            askSabotage(horses);
+                            mobAsked = true;
+                            choicePicked = true;
+                        } else if (choice.equalsIgnoreCase("Steroid")) {
+                            askSteroid(horses);
+                            mobAsked = true;
+                            choicePicked = true;
+                        } else if (choice.equalsIgnoreCase("Exit")) {
+                            mobAsked = true;
+                            choicePicked = true;
+                            System.out.println("Ok then, your loss, see you tomorrow");
+                        } else {
+                            System.out.println("Invalid Response");
+                        }
+                    }
+                }else if (mobYN.equalsIgnoreCase("no")){
+                    mobAsked= true;
+                } else {
+                    System.out.println("Invalid Response");
+                }
+            }
+        }
 
         public void askBet(List<Horse> horses) {
             Scanner in = new Scanner(System.in);

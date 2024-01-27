@@ -6,6 +6,9 @@ public class Horse{
         private int grassRating;
         private int dirtRating;
         private double preferredLength;
+        private boolean isDrugged;
+        private boolean isExempt;
+
 
         private int currentPosition;
         private boolean finishedRace;
@@ -39,6 +42,22 @@ public class Horse{
         }
         public String getName() {
             return name;
+        }
+
+        public boolean isDrugged() {
+            return isDrugged;
+        }
+
+        public void setDrugged(boolean isDrugged) {
+            this.isDrugged = isDrugged;
+        }
+
+        public boolean isExempt() {
+            return isExempt;
+        }
+
+        public void setExempt(boolean isExempt) {
+            this.isExempt = isExempt;
         }
 
         public int getMudRating() {
