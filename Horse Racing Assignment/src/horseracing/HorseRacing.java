@@ -4,27 +4,27 @@ import java.util.List;
 import java.util.Scanner;
 
 public class HorseRacing {
-     public static void main(String[] args) {
+     public static void main(String[] args) { // Main command that runs everything
 
         int raceLength = (int)(Math.random()*2)+1;
 
         Scanner in = new Scanner(System.in);    
         HorseRacingHelper.prepareHorseRacingSimulation();
-        Player player = new Player(500.00);
-        Player.nextRound();Player.nextRound();Player.nextRound();
+        Player player = new Player(500.00); // Creates Player Object
+        Player.nextRound();
         boolean gameOver = false;
-        while(!gameOver){
+        while(!gameOver){ 
             HorseRacingHelper.clearConsole();
 
             int numHorsesInRace = (int)(Math.random()*7)+5;
 
-            
-            Race race = HorseRacingHelper.createRace(numHorsesInRace, raceLength, HorseRacingHelper.DIRT);
+            int raceType = (int)(Math.random()*3);
+            Race race = HorseRacingHelper.createRace(numHorsesInRace, raceLength, raceType);
             
 
             race.displayRaceInfo();
             player.askBet(race.getHorses());
-            if (player.getMobUnlocked()){
+            if (player.getMobUnlocked()){ // Checks to see if mob unlocked before prompting the mob menu
                 player.askMob(race.getHorses());
             }
 
@@ -32,6 +32,7 @@ public class HorseRacing {
 
             System.out.println("Race is Over");
             race.payOut();
+            race.removeMobEffects(race.getHorses());
 
             gameOver = playAgain(in);
         }
@@ -39,9 +40,7 @@ public class HorseRacing {
         
     }
 
-    
-
-    private static boolean playAgain(Scanner in) {
+    private static boolean playAgain(Scanner in) { // Prompts the user to play again, Also prompts user with the mob call after 4 races + $100 of bet money
         System.out.print("\u001B[?25l");  // Hide the cursor
         boolean hasChosenTip = false;
         while(!hasChosenTip) {
@@ -73,7 +72,7 @@ public class HorseRacing {
         HorseRacingHelper.pauseForMilliseconds(2000);
         
 
-        if((Player.getRound() == 4)&&(Player.getTipAmount()>100)){
+        if((Player.getRound() == 4)&&(Player.getTipAmount()>=100)){
 
             System.out.println("Brookie: I have found a opportunity for you...");
             HorseRacingHelper.pauseForMilliseconds(1000);

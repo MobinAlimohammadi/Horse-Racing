@@ -23,9 +23,10 @@ public class Horse{
             this.currentPosition = 2;
             this.finishedRace = false;
             this.number = 0;
+            this.isDrugged = false;
         }
         
-        public void setNumber(int number){
+        public void setNumber(int number){ 
             this.number = number;
         }
 
